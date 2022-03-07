@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+<h1>{{modelobj.name}}<h1>
+
+<img src="{{modelobj.imageurl.url}}"></img>
+<img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{data.img}}" alt="" title="{{ref}}" width="150" height="150"/>
+
 </body>
 </html>
