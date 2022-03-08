@@ -31,7 +31,7 @@ def index(request):
         embed_QR(names, name)
         with open(name, "rb") as image_file:
             image_data = base64.b64encode(image_file.read()).decode('utf-8')
-        return render(request, 'urlpage.html', {'image': image_data})
+        return render(request, 'index.html', {'image': image_data,'urlshort':names})
 
 
 
