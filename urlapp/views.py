@@ -4,38 +4,42 @@ import pyshorteners
 import qrcode
 from .models import  *
 
+from pyqrcode import create
+import png
+import os
+import base64
+from pyqrcode import create
+import png
+
+
+def embed_QR(url_input, name):
+    embedded_qr = create(url_input)
+    embedded_qr.png(name, scale=7)
+
+
 
 # Create your views here.
 def index(request):
+
     if request.method=='POST':
         print(request.POST['urlshortner'])
         urlvar=request.POST['urlshortner']
         s = pyshorteners.Shortener()
-        shorturl=s.tinyurl.short(urlvar)
-        input_data = shorturl
-        # Creating an instance of qrcode
-        qr = qrcode.QRCode(
-            version=1,
-            box_size=10,
-            border=5)
-
-        qr.add_data(input_data)
-        qr.make(fit=True)
-        img = qr.make_image(fill='black', back_color='white',, embeded_image_path="/media/images/{shorturl}")
-        #img_3 = qr.make_image(image_factory=StyledPilImage, embeded_image_path="/path/to/image.png")
-        img.save()
-        modelobj=qrcodemodel(name=shorturl,qrimage=img.save("qrco)
-        modelobj.save()
-        print(modelobj)
-
-        print(shorturl)
-      #  data={'shorturl':shorturl,'img':img}
-       # print(data['shorturl'])
-       # print(data['img'])
+        names=s.tinyurl.short(urlvar)
+        name="temp"
+        name += ".png"
+        embed_QR(names, name)
+        with open(name, "rb") as image_file:
+            image_data = base64.b64encode(image_file.read()).decode('utf-8')
+        return render(request, 'urlpage.html', {'image': image_data})
 
 
 
-        return render(request,"urlpage.html",{"modelobj":modelobj,"shorturl":shorturl})
+
+
+
+
+
 
 
 

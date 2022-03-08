@@ -1,15 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+    <head>
+        <title>Simple QR App</title>
+    </head>
+  <body>
 
-<h1>{{modelobj.name}}<h1>
+    <h1>Welcome to the QR app</h1>
 
-<img src="{{modelobj.imageurl.url}}"></img>
-<img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data={{data.img}}" alt="" title="{{ref}}" width="150" height="150"/>
+    {% if image %}
+        <h1> Your generated qr code </h1>
+        <a href="data:image/png;base64,{{ image }}" download>
+            <img src="data:image/png;base64,{{ image }}">
+            <button class="btn"><i class="fa fa-download"></i> Download</button>
+        </a>
+    {% endif %}
 
-</body>
 </html>
